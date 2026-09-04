@@ -1,0 +1,2 @@
+import React from 'react';
+export default function Footer() { return <footer><div><button className="footer-brand"><span className="brand-mark">D</span><strong>Deal<span>Pilot</span></strong></button><p>Commerce that works harder for you.</p></div><div className="footer-links"><span>About</span><span>How it works</span><span>Support</span><span>Privacy</span></div><small>© 2026 DealPilot Technologies</small></footer>; }
