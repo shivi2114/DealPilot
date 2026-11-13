@@ -1,7 +1,7 @@
 const express = require("express");
 const negotiate = require("../services/aiAgent");
 const { getProduct } = require("../data/products");
-const { validateOffer } = require("../services/policyEngine");
+const { validateOffer } = require("../services/PolicyEngine");
 const { appendRecord } = require("../services/storageService");
 const { recordAudit } = require("../services/auditService");
 const router = express.Router();

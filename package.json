@@ -1,0 +1,12 @@
+{
+  "name": "dealpilot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DealPilot - Online bargaining platform where buyers discover products and negotiate prices directly with sellers",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build && npm --prefix backend install",
+    "start": "node backend/server.js",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev"
+  }
+}
