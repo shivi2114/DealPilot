@@ -30,17 +30,24 @@ app.use("/api/analytics", analyticsRoutes);
 const distPath = path.join(__dirname, "../frontend/dist");
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get("*", (req, res, next) => {
-    if (req.path.startsWith("/api/")) return next();
+  // Express 5 compatible SPA fallback (no '*' string to avoid path-to-regexp error)
+  app.use((req, res, next) => {
+    if (req.method !== "GET" || req.path.startsWith("/api")) {
+      return next();
+    }
     res.sendFile(path.join(distPath, "index.html"));
   });
 } else {
   app.get("/", (req, res) => res.json({ success: true, message: "DealPilot backend is running" }));
 }
 
-// 404 handler for unmatched API routes
-app.use("/api/*", (req, res) => res.status(404).json({ success: false, error: "API route not found" }));
-app.use((req, res) => res.status(404).json({ success: false, error: "Route not found" }));
+// 404 handler for unmatched routes
+app.use((req, res) => {
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ success: false, error: "API route not found" });
+  }
+  res.status(404).json({ success: false, error: "Route not found" });
+});
 
 // Global error handler
 app.use((error, req, res, next) => {
